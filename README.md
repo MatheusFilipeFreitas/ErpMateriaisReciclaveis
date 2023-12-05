@@ -49,7 +49,7 @@ Project was introduced by [![UFN](https://site.ufn.edu.br/)].
 
 ### Built With
 
-* ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)
+* ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)[TrelloLink](https://trello.com/b/rQvEG1kJ/erpmr)
 * ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
