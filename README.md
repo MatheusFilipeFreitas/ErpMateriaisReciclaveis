@@ -48,7 +48,7 @@ Project was introduced by [![UFN](https://site.ufn.edu.br/)].
 
 ### Built With
 
-* ![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)[TrelloLink](https://trello.com/b/rQvEG1kJ/erpmr)
+* [![Trello][trello-shield]][trello-url]
 * ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -84,6 +84,8 @@ Project Link: [https://github.com/MatheusFilipeFreitas/ErpMateriaisReciclaveis](
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+[trello-shield]: https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white
+[trello-url]: https://trello.com/b/rQvEG1kJ/erpmr
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
