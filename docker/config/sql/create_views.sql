@@ -1,15 +1,16 @@
 USE RecyProTech;
 GO
 
+create view vw_produtoHistorico as
+SELECT * FROM produto_Historico;
+
 create view vw_operacaoEntrada as
 select * from operacao
 where tipo_operacao = 'Entrada';
-GO
 
 create view vw_operacaoSaida as
 select * from operacao
 where tipo_operacao = 'Saída';
-GO
 
 CREATE VIEW vw_ProdutosDetalhados
 AS
@@ -27,4 +28,15 @@ FROM
     produto p
 LEFT JOIN
     produto_Historico h ON p.id_produto = h.id_produto;
-GO
+
+create view vw_operacaoEntrada as
+select * from vw_ProdutosDetalhados;
+
+create view vw_operacaoEntrada as
+select * from vw_operacaoEntrada;
+
+create view vw_operacaoEntrada as
+select * from vw_operacaoSaida; 
+
+create view vw_logs as
+select * from tbl_log;
