@@ -52,10 +52,11 @@ begin --criar tabelas
         foreign key (id_usuario) references usuario(id_usuario),
     );
 
-    CREATE TABLE sistema_log (
+    CREATE TABLE tbl_log (
         id_log int primary key identity,
         data_hora datetime,
-        evento varchar(100),
+        tabela_afetada varchar(100),
+        tipo_operacao varchar(20),
         descricao varchar(max)
     );
 
