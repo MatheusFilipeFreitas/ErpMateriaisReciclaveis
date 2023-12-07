@@ -1,23 +1,150 @@
 USE RecyProTech;
 GO
 
-CREATE TRIGGER tr_LogProcedures
-ON DATABASE
-FOR CREATE_PROCEDURE, ALTER_PROCEDURE, DROP_PROCEDURE
+CREATE TRIGGER tr_LogInsertProduto
+ON produto
+AFTER INSERT
 AS
 BEGIN
-    SET NOCOUNT ON;
-
-    DECLARE @evento varchar(100), @descricao varchar(max);
-
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
     SELECT
-        @evento = EVENTDATA().value('(/EVENT_INSTANCE/EventType)[1]', 'varchar(100)'),
-        @descricao = EVENTDATA().value('(/EVENT_INSTANCE/ObjectName)[1]', 'varchar(max)');
-
-    -- Inserir log
-    EXEC sp_InsertLog @evento, @descricao;
+        GETDATE(),
+        'produto',
+        'Inserção',
+        'Inserção de registro na tabela produto'
+    FROM inserted;
 END;
 GO
+
+-- Trigger para atualizações na tabela produto
+CREATE TRIGGER tr_LogUpdateProduto
+ON produto
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'produto',
+        'Atualização',
+        'Atualização de registro na tabela produto'
+    FROM inserted;
+END;
+GO
+    
+-- Trigger para exclusões na tabela produto
+CREATE TRIGGER tr_LogDeleteProduto
+ON produto
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'produto',
+        'Exclusão',
+        'Exclusão de registro na tabela produto'
+    FROM deleted;
+END;
+GO
+
+-- Trigger para inserções na tabela operacao
+CREATE TRIGGER tr_LogInsertOperacao
+ON operacao
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'operacao',
+        'Inserção',
+        'Inserção de registro na tabela operacao'
+    FROM inserted;
+END;
+GO
+
+-- Trigger para atualizações na tabela operacao
+create TRIGGER tr_LogUpdateOperacao
+ON operacao
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'operacao',
+        'Atualização',
+        'Atualização de registro na tabela operacao'
+    FROM inserted;
+END;
+GO
+
+-- Trigger para exclusões na tabela operacao
+CREATE TRIGGER tr_LogDeleteOperacao
+ON operacao
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'operacao',
+        'Exclusão',
+        'Exclusão de registro na tabela operacao'
+    FROM deleted;
+END;
+GO
+
+-- Trigger para inserções na tabela usuario
+CREATE TRIGGER tr_LogInsertUsuario
+ON usuario
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'usuario',
+        'Inserção',
+        'Inserção de registro na tabela usuario'
+    FROM inserted;
+END;
+GO
+
+-- Trigger para atualizações na tabela usuario
+create TRIGGER tr_LogUpdateUsuario
+ON usuario
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'usuario',
+        'Atualização',
+        'Atualização de registro na tabela usuario'
+    FROM inserted;
+END;
+GO
+
+-- Trigger para exclusões na tabela usuario
+CREATE TRIGGER tr_LogDeleteUsuario
+ON usuario
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO tbl_log (data_hora, tabela_afetada, tipo_operacao, descricao)
+    SELECT
+        GETDATE(),
+        'usuario',
+        'Exclusão',
+        'Exclusão de registro na tabela usuario'
+    FROM deleted;
+END;
+GO
+    
+-- Criar uma trigger para atualizar o estoque
 
 CREATE TRIGGER tr_atualizarEstoque
 ON operacao
