@@ -38,4 +38,6 @@ VALUES (1, 1, 'Entrada', 'Compra', 3, GETDATE());
 INSERT INTO operacao (id_produto, id_usuario, tipo_operacao, motivo, quantidade, data_hora)
 VALUES (2, 1, 'Saída', 'Venda', 30, GETDATE());
 
+INSERT INTO operacao (id_produto, id_usuario, tipo_operacao, motivo, quantidade, data_hora)
+VALUES (1, 1, 'Entrada', 'Compra', 2, GETDATE());
 end
