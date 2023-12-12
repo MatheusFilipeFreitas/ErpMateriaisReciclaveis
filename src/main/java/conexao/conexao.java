@@ -7,7 +7,7 @@ public class conexao {
     
     public Connection getConexao(){
         try{
-            Connection conn = DriverManager.getConnection("Server=localhost;Database=RecyProTech;User Id=as;Password=laboratorio;");
+            Connection conn = DriverManager.getConnection("Server=localhost;Database=RecyProTech;User Id=sa;Password=laboratorio;");
             System.out.println("Conexao com o banco realizada com sucesso");
             
             return conn;
