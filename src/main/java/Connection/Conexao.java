@@ -1,13 +1,13 @@
 
-package conexao;
+package Connection;
 
 import java.sql.*;
 
-public class conexao {
+public class Conexao {
     
     public Connection getConexao(){
         try{
-            Connection conn = DriverManager.getConnection("Server=localhost;Database=RecyProTech;User Id=sa;Password=laboratorio;");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=RecyProTech;user=sa;password=laboratorio1@;encrypt=true;trustServerCertificate=true");
             System.out.println("Conexao com o banco realizada com sucesso");
             
             return conn;
@@ -20,7 +20,7 @@ public class conexao {
     }
     
     public static void main(String[] args){
-        conexao c = new conexao();
+        Conexao c = new Conexao();
         c.getConexao();
     }
 }
