@@ -14,7 +14,7 @@ COPY ./config//scripts/db_initial_config.sh /db_initial_config.sh
 
 # Defina as variáveis de ambiente para o SQL Server
 ENV ACCEPT_EULA=Y
-ENV SA_PASSWORD=laboratorio1#
+ENV SA_PASSWORD=laboratorio1@
 
 # Configure o script de entrada personalizado
 ENTRYPOINT ["/bin/bash", "/init-script.sh"]

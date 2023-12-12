@@ -13,6 +13,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para atualizar informações de um produto
 CREATE PROCEDURE sp_UpdateProduto
     @id_produto int,
     @cod varchar(50),
@@ -30,6 +31,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para excluir um produto
 CREATE PROCEDURE sp_DeleteProduto
     @id_produto int
 AS
@@ -39,6 +41,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para inserir um novo usuário
 CREATE PROCEDURE sp_InsertUsuario
     @nome varchar(50),
     @cpf int
@@ -49,6 +52,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para atualizar informações de um usuário
 CREATE PROCEDURE sp_UpdateUsuario
     @id_usuario int,
     @nome varchar(50),
@@ -62,6 +66,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para excluir um usuário
 CREATE PROCEDURE sp_DeleteUsuario
     @id_usuario int
 AS
@@ -71,6 +76,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para inserir uma nova operação
 CREATE PROCEDURE sp_InsertOperacao
     @id_produto int,
     @id_usuario int,
@@ -85,6 +91,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para atualizar informações de uma operação
 CREATE PROCEDURE sp_UpdateOperacao
     @id_operacao int,
     @id_produto int,
@@ -106,6 +113,7 @@ BEGIN
 END;
 GO
 
+-- Stored Procedure para excluir uma operação
 CREATE PROCEDURE sp_DeleteOperacao
     @id_operacao int
 AS

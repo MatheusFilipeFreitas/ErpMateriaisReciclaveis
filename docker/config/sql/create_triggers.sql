@@ -1,6 +1,24 @@
 USE RecyProTech;
 GO
 
+CREATE TRIGGER tr_LogProcedures
+ON DATABASE
+FOR CREATE_PROCEDURE, ALTER_PROCEDURE, DROP_PROCEDURE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @evento varchar(100), @descricao varchar(max);
+
+    SELECT
+        @evento = EVENTDATA().value('(/EVENT_INSTANCE/EventType)[1]', 'varchar(100)'),
+        @descricao = EVENTDATA().value('(/EVENT_INSTANCE/ObjectName)[1]', 'varchar(max)');
+
+    -- Inserir log
+    EXEC sp_InsertLog @evento, @descricao;
+END;
+GO
+
 CREATE TRIGGER tr_LogInsertProduto
 ON produto
 AFTER INSERT
@@ -31,7 +49,7 @@ BEGIN
     FROM inserted;
 END;
 GO
-    
+
 -- Trigger para exclusões na tabela produto
 CREATE TRIGGER tr_LogDeleteProduto
 ON produto
@@ -143,7 +161,7 @@ BEGIN
     FROM deleted;
 END;
 GO
-    
+
 -- Criar uma trigger para atualizar o estoque
 
 CREATE TRIGGER tr_atualizarEstoque

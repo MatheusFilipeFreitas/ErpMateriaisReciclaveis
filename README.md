@@ -63,29 +63,13 @@ For installing this project you just need to download the project to your PC, an
   ```sh
    openjdk version "21.0.1"
   ```
-* sql server
+* sql --version
   ```sh
   2018 
-  ```
-* docker desktop
+  ``` 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Running Docker
-
-Go where the Dockerfile is located in the terminal and run:
-```
-$ docker build -t YOUR_IMAGE_NAME .
-```
-And then run:
-
-```
-$ docker run -d -p 1433:1433 YOUR_CONTAINER_NAME
-```
-For more info:
-![Docker Docs](https://docs.docker.com/)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- CONTACT -->
 ## Contact
 

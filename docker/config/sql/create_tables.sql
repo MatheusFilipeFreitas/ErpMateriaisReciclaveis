@@ -6,7 +6,6 @@ USE RecyProTech;
 GO
 
 begin --criar tabelas
-
     create table usuario (
         id_usuario int primary key identity,
         nome varchar(50),
@@ -36,9 +35,13 @@ begin --criar tabelas
         ValidTo datetime2 not null
     );
 
+
+
+
     -- Ativar a rastreabilidade temporal na tabela produto
     ALTER TABLE produto
     SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.produto_Historico));
+
 
     create table operacao (
         id_operacao int primary key identity,
@@ -59,6 +62,4 @@ begin --criar tabelas
         tipo_operacao varchar(20),
         descricao varchar(max)
     );
-
-
 end
