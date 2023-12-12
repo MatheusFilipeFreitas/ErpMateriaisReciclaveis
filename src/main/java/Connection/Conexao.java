@@ -1,9 +1,9 @@
 
-package conexao;
+package Connection;
 
 import java.sql.*;
 
-public class conexao {
+public class Conexao {
     
     public Connection getConexao(){
         try{
@@ -20,7 +20,7 @@ public class conexao {
     }
     
     public static void main(String[] args){
-        conexao c = new conexao();
+        Conexao c = new Conexao();
         c.getConexao();
     }
 }
