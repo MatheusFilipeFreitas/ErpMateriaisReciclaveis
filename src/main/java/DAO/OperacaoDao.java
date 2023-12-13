@@ -5,7 +5,7 @@
 package DAO;
 
 import Beans.Operacao;
-import conexao.conexao;
+import Connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class OperacaoDao {
 
-    private conexao conection;
+    private Conexao conection;
     private Connection conn;
 
     public OperacaoDao() {
-        this.conection = new conexao();
+        this.conection = new Conexao();
         this.conn = this.conection.getConexao();
     }
 
@@ -46,7 +46,7 @@ public class OperacaoDao {
         }
     }
     
-    /*public Operacao Consultar(int id) {
+    public Operacao Consultar(int id) {
         String sql = "SELECT * FROM operacao WHERE id_operacao  = ?";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -55,14 +55,17 @@ public class OperacaoDao {
             ResultSet rs = stmt.executeQuery();
             Operacao op = new Operacao();
             rs.first();
-            op.setId_produto(rs.getPro("Id_produto"));
-            a.setNacionalidade(rs.getString("nacionalidade"));
-            a.setAnoNasc(rs.getString("dataNasc"));
+            ProdutoDao pdao = new ProdutoDao();
+            UsuarioDao uDao = new UsuarioDao();
+            
+            op.setId_produto(pdao.getProduto(rs.getInt("id_produto")));
+            op.setId_usuario(uDao.getUsuario(rs.getInt("id_usuario")) );
+            
 
-            return a;
+            return op;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao consulta autores: " + ex.getMessage());
             return null;
         }
-    }*/
+    }
 }
