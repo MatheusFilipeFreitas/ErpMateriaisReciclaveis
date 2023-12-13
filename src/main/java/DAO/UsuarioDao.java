@@ -5,7 +5,8 @@
 package DAO;
 
 import Beans.Usuario;
-import conexao.conexao;
+import Connection.Conexao;
+import Connection.Conexao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class UsuarioDao {
 
-    private conexao getConexao;
+    private Conexao getConexao;
     private Connection conn;
 
     public void inserir(Usuario usuario) {

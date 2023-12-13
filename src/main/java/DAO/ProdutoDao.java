@@ -6,7 +6,7 @@ package DAO;
 
 import Beans.Produto;
 import Beans.Usuario;
-import conexao.conexao;
+import Connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ProdutoDao {
     
-     private conexao getConexao;
+     private Conexao getConexao;
     private Connection conn;
 
     public void inserir(Produto produto) {
