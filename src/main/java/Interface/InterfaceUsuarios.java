@@ -57,7 +57,7 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,6 +214,7 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
         
         UsuarioDao uDAO = new UsuarioDao();
         uDAO.inserir(u);
+        limparFormulario();
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -236,6 +237,7 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
                 System.out.println(ex.getMessage());
             }
             uDAO.editar(usuario);
+            limparFormulario();
             preencheTable();
         }
     }//GEN-LAST:event_btnEditarActionPerformed

@@ -218,6 +218,7 @@ public class InterfaceProdutos extends javax.swing.JFrame {
         
         ProdutoDao pDAO = new ProdutoDao();
         pDAO.inserir(p);
+        limpaFormulario();
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -234,10 +235,7 @@ public class InterfaceProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_tblProdutosMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        getIdFromTable = 0;
-        txtCodigo.setText("");
-        txtDescricao.setText("");
-        Jdate.setDate(null);
+        limpaFormulario();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -246,10 +244,7 @@ public class InterfaceProdutos extends javax.swing.JFrame {
         if(getIdFromTable != 0) {
             pDAO.excluir(getIdFromTable);
         }
-        getIdFromTable = 0;
-        txtCodigo.setText("");
-        txtDescricao.setText("");
-        Jdate.setDate(null);
+        limpaFormulario();
         preencheTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -269,9 +264,17 @@ public class InterfaceProdutos extends javax.swing.JFrame {
                 System.out.println(ex.getMessage());
             }
             pDAO.editar(produto);
-            preencheTable();
         }
+        limpaFormulario();
+        preencheTable();
     }//GEN-LAST:event_EditarActionPerformed
+    
+    private void limpaFormulario() {
+        getIdFromTable = 0;
+        txtCodigo.setText("");
+        txtDescricao.setText("");
+        Jdate.setDate(null);
+    }
     
     /**
      * @param args the command line arguments
