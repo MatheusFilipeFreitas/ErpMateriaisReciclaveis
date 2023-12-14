@@ -20,7 +20,7 @@ import lombok.*;
 public class Produto {
     private int id_produto;
     private String cod;
-    private String descrisao;
+    private String descricao;
     private int estoque;
     private Date validade;
 }
