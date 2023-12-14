@@ -21,8 +21,13 @@ import java.util.List;
  */
 public class UsuarioDao {
 
-    private Conexao getConexao;
+    private Conexao conexao;
     private Connection conn;
+    
+    public UsuarioDao() {
+        this.conexao = new Conexao();
+        this.conn = this.conexao.getConexao();
+    }
 
     public void inserir(Usuario usuario) {
         String sql = "EXEC sp_InsertUsuario ?,?;";

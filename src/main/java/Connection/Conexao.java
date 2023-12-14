@@ -7,7 +7,7 @@ public class Conexao {
     
     public Connection getConexao(){
         try{
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=RecyProTech;user=sa;password=laboratorio1@;encrypt=true;trustServerCertificate=true");
+            Connection conn = DriverManager.getConnection("jdbc:jtds:sqlserver://localhost:1433/RecyProTech;instance=v1;user=sa;password=laboratorio1@");
             System.out.println("Conexao com o banco realizada com sucesso");
             
             return conn;

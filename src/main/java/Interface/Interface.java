@@ -180,7 +180,7 @@ public class Interface extends javax.swing.JFrame {
             Object[] obj = new Object[]{
                 p.getId_produto(),
                 p.getCod(),
-                p.getDescrisao(),
+                p.getDescricao(),
                 p.getValidade()};
             tableProdutos.addRow(obj);
         }
@@ -189,11 +189,12 @@ public class Interface extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         Produto p = new Produto();
         p.setCod(txtCodigo.getText());
-        p.setDescrisao(txtDescricao.getText());
+        p.setDescricao(txtDescricao.getText());
         p.setValidade(Jdate.getDate());
         
         ProdutoDao pDAO = new ProdutoDao();
         pDAO.inserir(p);
+        preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

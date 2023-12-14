@@ -20,16 +20,21 @@ import java.util.List;
  */
 public class ProdutoDao {
     
-     private Conexao getConexao;
+    private Conexao conexao;
     private Connection conn;
-
+    
+    public ProdutoDao() {
+        this.conexao = new Conexao();
+        this.conn = this.conexao.getConexao();
+    }
+    
     public void inserir(Produto produto) {
         String sql = "EXEC sp_InsertProduto ?,?,?,?;";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, produto.getCod());
-            stmt.setString(2, produto.getDescrisao());
+            stmt.setString(2, produto.getDescricao());
             stmt.setDate(3, new java.sql.Date(produto.getValidade().getTime()));
             stmt.setInt(4, produto.getEstoque());
             
@@ -46,7 +51,7 @@ public class ProdutoDao {
             PreparedStatement smt = conn.prepareStatement(sql);
 
             smt.setString(1, produto.getCod());
-            smt.setString(2, produto.getDescrisao());
+            smt.setString(2, produto.getDescricao());
             smt.setDate(3, new java.sql.Date(produto.getValidade().getTime()));
             smt.setInt(4, produto.getEstoque());
 
@@ -84,7 +89,7 @@ public class ProdutoDao {
 
             p.setId_produto(id_produto);
             p.setCod(rs.getString("cod"));
-            p.setDescrisao(rs.getString("descrisao"));
+            p.setDescricao(rs.getString("descricao"));
             p.setEstoque(rs.getInt("estoque"));
             p.setValidade(rs.getDate("validade"));
             
@@ -97,7 +102,7 @@ public class ProdutoDao {
     }
 
     public List<Produto> getProdutos() {
-        String sql = "SELECT * FROM produto";
+        String sql = "SELECT * FROM produto;";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -110,7 +115,7 @@ public class ProdutoDao {
 
                 p.setId_produto(rs.getInt("id_produto"));
                 p.setCod(rs.getString("cod"));
-                p.setDescrisao(rs.getString("descrisao"));
+                p.setDescricao(rs.getString("descricao"));
                 p.setEstoque(rs.getInt("estoque"));
                 p.setValidade(rs.getDate("validade"));
 
@@ -118,6 +123,7 @@ public class ProdutoDao {
             }
             return listaProdutos;
         } catch (SQLException ex) {
+            System.out.println("erro" + ex.getMessage());
             return null;
         }
     }
@@ -136,7 +142,7 @@ public class ProdutoDao {
 
                 p.setId_produto(rs.getInt("id_produto"));
                 p.setCod(rs.getString("cod"));
-                p.setDescrisao(rs.getString("descrisao"));
+                p.setDescricao(rs.getString("descricao"));
                 p.setEstoque(rs.getInt("estoque"));
                 p.setValidade(rs.getDate("validade"));
                 
