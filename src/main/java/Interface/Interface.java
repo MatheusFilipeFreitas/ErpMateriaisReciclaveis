@@ -7,6 +7,7 @@ package Interface;
 import DAO.ProdutoDao;
 import Beans.Produto;
 import Connection.Conexao;
+import java.time.LocalDate;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,8 @@ public class Interface extends javax.swing.JFrame {
     /**
      * Creates new form Interface
      */
+    private int getIdFromTable = 0;
+    
     public Interface() {
         initComponents();
         preencheTable();
@@ -116,6 +119,11 @@ public class Interface extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Limpar Campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 220, 40));
 
         btnCadastrar.setBackground(new java.awt.Color(190, 26, 43));
@@ -133,6 +141,11 @@ public class Interface extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 220, 40));
 
         Editar.setBackground(new java.awt.Color(190, 26, 43));
@@ -157,6 +170,11 @@ public class Interface extends javax.swing.JFrame {
                 "ID", "Codigo", "Descricao", "Data de Validade"
             }
         ));
+        tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProdutos);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 720, 510));
@@ -197,6 +215,38 @@ public class Interface extends javax.swing.JFrame {
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
+        DefaultTableModel tbProdutos = (DefaultTableModel) tblProdutos.getModel(); 
+        int selectedIndex = tblProdutos.getSelectedRow();
+        
+        int id  = Integer.parseInt(tbProdutos.getValueAt(selectedIndex, 0).toString());
+        getIdFromTable = id;
+        txtCodigo.setText(tbProdutos.getValueAt(selectedIndex, 1).toString());
+        txtDescricao.setText(tbProdutos.getValueAt(selectedIndex, 2).toString());
+        java.sql.Date dateInSql = (java.sql.Date) tbProdutos.getValueAt(selectedIndex, 3);
+        Jdate.setDate(new Date(dateInSql.getTime()));
+    }//GEN-LAST:event_tblProdutosMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        getIdFromTable = 0;
+        txtCodigo.setText("");
+        txtDescricao.setText("");
+        Jdate.setDate(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ProdutoDao pDAO = new ProdutoDao();
+        
+        if(getIdFromTable != 0) {
+            pDAO.excluir(getIdFromTable);
+        }
+        getIdFromTable = 0;
+        txtCodigo.setText("");
+        txtDescricao.setText("");
+        Jdate.setDate(null);
+        preencheTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
