@@ -40,6 +40,11 @@
 
 ## About The Project
 
+This project is a prototype for the current lessons:
+- Laboratório de Desenvolvimento de Software (Professor Ricardo)
+- Implementação de banco de dados (Professor Fabricio)
+By: Universidade Franciscana (UFN)
+
 "RecyProTech" is an innovative and specialized ERP (Enterprise Resource Planning) system tailored to meet the specific needs of companies dealing with recyclable products. This comprehensive solution provides an integrated platform to efficiently manage all operations, from the acquisition, tracking, and storage of recyclable materials to the process of transformation and distribution of end products. With advanced features for inventory monitoring, supplier management, intelligent logistics, and detailed analytical reporting, RecyProTech optimizes operational efficiency and sustainability, enabling companies to achieve their business objectives while making a positive contribution to the environment.
 Project was introduced by [![UFN](https://site.ufn.edu.br/)].
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
