@@ -262,6 +262,7 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         
         OperacaoDao oDAO = new OperacaoDao();
         oDAO.inserir(o);
+        limparFormulario();
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
