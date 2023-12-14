@@ -6,21 +6,20 @@ package Interface;
 
 import DAO.ProdutoDao;
 import Beans.Produto;
+import DAO.UsuarioDao;
+import Beans.Usuario;
 import Connection.Conexao;
-import java.time.LocalDate;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Interface extends javax.swing.JFrame {
+public class InterfaceUsuarios extends javax.swing.JFrame {
 
     /**
      * Creates new form Interface
      */
-    private int getIdFromTable = 0;
-    
-    public Interface() {
+    public InterfaceUsuarios() {
         initComponents();
         preencheTable();
     
@@ -46,17 +45,15 @@ public class Interface extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         lblCodigo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
-        txtCodigo = new javax.swing.JTextField();
-        Jdate = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        txtCpf = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        Editar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProdutos = new javax.swing.JTable();
+        tblUsuarios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,38 +90,38 @@ public class Interface extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 130));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "Formulario Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 18))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 2), "Formulario Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 18))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCodigo.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        lblCodigo.setText("Código");
-        jPanel4.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 60, 30));
+        lblCodigo.setText("Nome");
+        jPanel4.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 60, 30));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        jLabel4.setText("Descrição");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 100, 30));
+        jLabel4.setText("Cpf");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 100, 30));
 
-        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        jLabel5.setText("Data de Validade");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 150, 30));
-
-        txtDescricao.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jPanel4.add(txtDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, 40));
-
-        txtCodigo.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jPanel4.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 220, 40));
-        jPanel4.add(Jdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 240, 40));
-
-        jButton1.setBackground(new java.awt.Color(190, 26, 43));
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Limpar Campos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtCpf.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txtCpfActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 220, 40));
+        jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 220, 40));
+
+        txtNome.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jPanel4.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 220, 40));
+
+        btnLimpar.setBackground(new java.awt.Color(190, 26, 43));
+        btnLimpar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLimpar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpar.setText("Limpar Campos");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 220, 40));
 
         btnCadastrar.setBackground(new java.awt.Color(190, 26, 43));
         btnCadastrar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -135,24 +132,29 @@ public class Interface extends javax.swing.JFrame {
                 btnCadastrarActionPerformed(evt);
             }
         });
-        jPanel4.add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 220, 40));
+        jPanel4.add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 220, 40));
 
-        jButton3.setBackground(new java.awt.Color(190, 26, 43));
-        jButton3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Excluir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(190, 26, 43));
+        btnExcluir.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 220, 40));
+        jPanel4.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 220, 40));
 
-        Editar.setBackground(new java.awt.Color(190, 26, 43));
-        Editar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        Editar.setForeground(new java.awt.Color(255, 255, 255));
-        Editar.setText("Editar");
-        jPanel4.add(Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 220, 40));
+        btnEditar.setBackground(new java.awt.Color(190, 26, 43));
+        btnEditar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 220, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 630, 540));
 
@@ -160,22 +162,17 @@ public class Interface extends javax.swing.JFrame {
         jPanel5.setForeground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblProdutos.setBackground(new java.awt.Color(210, 129, 136));
-        tblProdutos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuarios.setBackground(new java.awt.Color(210, 129, 136));
+        tblUsuarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Codigo", "Descricao", "Data de Validade"
+                "ID", "Nome", "Cpf"
             }
         ));
-        tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblProdutosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblProdutos);
+        jScrollPane1.setViewportView(tblUsuarios);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 720, 510));
 
@@ -188,65 +185,61 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void preencheTable(){
-        ProdutoDao pDAO = new ProdutoDao();
-        List<Produto> listaProdutos = pDAO.getProdutos();
+        UsuarioDao uDAO = new UsuarioDao();
+        List<Usuario> listaUsuarios = uDAO.getUsuarios();
         
-        DefaultTableModel tableProdutos = (DefaultTableModel) tblProdutos.getModel();
-        tableProdutos.setNumRows(0);
+        DefaultTableModel tableUsuarios = (DefaultTableModel) tblUsuarios.getModel();
+        tableUsuarios.setNumRows(0);
         
-        for(Produto p : listaProdutos){
+        for(Usuario u : listaUsuarios){
             Object[] obj = new Object[]{
-                p.getId_produto(),
-                p.getCod(),
-                p.getDescricao(),
-                p.getValidade()};
-            tableProdutos.addRow(obj);
+                u.getId_usuario(),
+                u.getNome(),
+                u.getCpf()};
+            tableUsuarios.addRow(obj);
         }
     }
     
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Produto p = new Produto();
-        p.setCod(txtCodigo.getText());
-        p.setDescricao(txtDescricao.getText());
-        p.setValidade(Jdate.getDate());
+        Usuario u = new Usuario();
+        u.setNome(txtNome.getText());
+        u.setCpf(Integer.parseInt(txtCpf.getText()));
         
-        ProdutoDao pDAO = new ProdutoDao();
-        pDAO.inserir(p);
+        UsuarioDao uDAO = new UsuarioDao();
+        uDAO.inserir(u);
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void tblProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutosMouseClicked
-        DefaultTableModel tbProdutos = (DefaultTableModel) tblProdutos.getModel(); 
-        int selectedIndex = tblProdutos.getSelectedRow();
-        
-        int id  = Integer.parseInt(tbProdutos.getValueAt(selectedIndex, 0).toString());
-        getIdFromTable = id;
-        txtCodigo.setText(tbProdutos.getValueAt(selectedIndex, 1).toString());
-        txtDescricao.setText(tbProdutos.getValueAt(selectedIndex, 2).toString());
-        java.sql.Date dateInSql = (java.sql.Date) tbProdutos.getValueAt(selectedIndex, 3);
-        Jdate.setDate(new Date(dateInSql.getTime()));
-    }//GEN-LAST:event_tblProdutosMouseClicked
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        getIdFromTable = 0;
-        txtCodigo.setText("");
-        txtDescricao.setText("");
-        Jdate.setDate(null);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ProdutoDao pDAO = new ProdutoDao();
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        Usuario u = new Usuario();
+        u.setNome(txtNome.getText());
+        u.setCpf(Integer.parseInt(txtCpf.getText()));
         
-        if(getIdFromTable != 0) {
-            pDAO.excluir(getIdFromTable);
+        UsuarioDao uDAO = new UsuarioDao();
+        uDAO.editar(u); 
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparFormulario();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Exclusao", JOptionPane.YES_NO_OPTION);
+        
+        if(resposta == JOptionPane.YES_OPTION){
+            UsuarioDao uDAO = new UsuarioDao();
+            //uDAO.excluir();
         }
-        getIdFromTable = 0;
-        txtCodigo.setText("");
-        txtDescricao.setText("");
-        Jdate.setDate(null);
-        preencheTable();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
     
+    private void limparFormulario(){
+        txtNome.setText("");
+        txtCpf.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -264,26 +257,14 @@ public class Interface extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -291,19 +272,17 @@ public class Interface extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Interface().setVisible(true);
+            new InterfaceUsuarios().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Editar;
-    private com.toedter.calendar.JDateChooser Jdate;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -315,8 +294,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JTable tblProdutos;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTable tblUsuarios;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }
