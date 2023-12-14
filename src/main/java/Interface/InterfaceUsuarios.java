@@ -19,6 +19,8 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
     /**
      * Creates new form Interface
      */
+    private int getIdFromTable = 0;
+    
     public InterfaceUsuarios() {
         initComponents();
         preencheTable();
@@ -172,6 +174,11 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
                 "ID", "Nome", "Cpf"
             }
         ));
+        tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsuarios);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 720, 510));
@@ -215,12 +222,22 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Usuario u = new Usuario();
-        u.setNome(txtNome.getText());
-        u.setCpf(Integer.parseInt(txtCpf.getText()));
-        
         UsuarioDao uDAO = new UsuarioDao();
-        uDAO.editar(u); 
+        
+        Usuario usuario = new Usuario();
+        
+        int id = getIdFromTable;
+        if(id!= 0) {
+            usuario.setId_usuario(id);
+            usuario.setNome(txtNome.getText());
+            try{
+               usuario.setCpf(Integer.parseInt(txtCpf.getText())); 
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+            uDAO.editar(usuario);
+            preencheTable();
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -228,13 +245,25 @@ public class InterfaceUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Exclusao", JOptionPane.YES_NO_OPTION);
+        UsuarioDao uDAO = new UsuarioDao();
         
-        if(resposta == JOptionPane.YES_OPTION){
-            UsuarioDao uDAO = new UsuarioDao();
-            //uDAO.excluir();
+        if(getIdFromTable != 0) {
+            uDAO.excluir(getIdFromTable);
         }
+        limparFormulario();
+        preencheTable();
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
+        DefaultTableModel tbUsuarios = (DefaultTableModel) tblUsuarios.getModel(); 
+        int selectedIndex = tblUsuarios.getSelectedRow();
+        
+        int id  = Integer.parseInt(tbUsuarios.getValueAt(selectedIndex, 0).toString());
+        getIdFromTable = id;
+        
+        txtNome.setText(tbUsuarios.getValueAt(selectedIndex, 1).toString());
+        txtCpf.setText(tbUsuarios.getValueAt(selectedIndex, 2).toString());
+    }//GEN-LAST:event_tblUsuariosMouseClicked
     
     private void limparFormulario(){
         txtNome.setText("");

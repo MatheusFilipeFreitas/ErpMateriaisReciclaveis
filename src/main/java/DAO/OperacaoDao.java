@@ -5,6 +5,8 @@
 package DAO;
 
 import Beans.Operacao;
+import Beans.Produto;
+import Beans.Usuario;
 import Connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -106,35 +108,35 @@ public class OperacaoDao {
     }
     
         public List<Operacao> ConsultaOperacoes() {
-        String sql = "SELECT * FROM operacao ";
+        String sql = "SELECT * FROM operacao;";
         try {
-            PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = stmt.executeQuery();
-            
-            Operacao op ;
-            List<Operacao> listaOperacoes = new ArrayList();
+
+            List<Operacao> listaOperacoes = new ArrayList<>();
+            ProdutoDao pdao = new ProdutoDao();
+            UsuarioDao uDao = new UsuarioDao();
 
             while (rs.next()) {
-                op = new Operacao();
-                rs.first();
-                ProdutoDao pdao = new ProdutoDao();
-                UsuarioDao uDao = new UsuarioDao();
-
+                Operacao op = new Operacao(); // Criar uma nova instância a cada iteração
                 op.setId_operacao(rs.getInt("id_operacao"));
-                op.setId_produto(pdao.getProduto(rs.getInt("id_produto")));
-                op.setId_usuario(uDao.getUsuario(rs.getInt("id_usuario")));
+                Produto produto = pdao.getProduto(rs.getInt("id_produto"));
+                op.setId_produto(produto);
+                Usuario usuario = uDao.getUsuario(rs.getInt("id_usuario"));
+                op.setId_usuario(usuario);
                 op.setTipo_operacao(rs.getString("tipo_operacao"));
                 op.setMotivo(rs.getString("motivo"));
                 op.setQuantidade(rs.getInt("quantidade"));
                 op.setData_hora(rs.getDate("data_hora"));
                 listaOperacoes.add(op);
             }
+
             return listaOperacoes;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao consulta Operações: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao consultar Operações: " + ex.getMessage());
             return null;
         }
+
     }
 
     public List<Operacao> ConsultaOperacoesSaida() {

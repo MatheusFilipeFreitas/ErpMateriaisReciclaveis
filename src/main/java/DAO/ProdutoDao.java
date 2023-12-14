@@ -47,13 +47,14 @@ public class ProdutoDao {
 
     public void editar(Produto produto) {
         try {
-            String sql = "EXEC sp_UpdateProduto ?,?,?,?;";
+            String sql = "EXEC sp_UpdateProduto ?,?,?,?,?;";
             PreparedStatement smt = conn.prepareStatement(sql);
-
-            smt.setString(1, produto.getCod());
-            smt.setString(2, produto.getDescricao());
-            smt.setDate(3, new java.sql.Date(produto.getValidade().getTime()));
-            smt.setInt(4, produto.getEstoque());
+            
+            smt.setInt(1, produto.getId_produto());
+            smt.setString(2, produto.getCod());
+            smt.setString(3, produto.getDescricao());
+            smt.setDate(4, new java.sql.Date(produto.getValidade().getTime()));
+            smt.setInt(5, produto.getEstoque());
 
             smt.execute();
         } catch (SQLException ex) {
@@ -76,30 +77,35 @@ public class ProdutoDao {
     }
 
     public Produto getProduto(int id_produto) {
-        String sql = "SELECT * FROM produto WHERE id = ?";
+        String sql = "SELECT * FROM produto WHERE id_produto = ?";
 
         try {
-            PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setInt(1, id_produto);
             ResultSet rs = stmt.executeQuery();
+
             Produto p = new Produto();
 
-            rs.first();
+            if (rs.next()) { // Verificar se existem resultados
+                p.setId_produto(id_produto);
+                p.setCod(rs.getString("cod"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setEstoque(rs.getInt("estoque"));
+                p.setValidade(rs.getDate("validade"));
 
-            p.setId_produto(id_produto);
-            p.setCod(rs.getString("cod"));
-            p.setDescricao(rs.getString("descricao"));
-            p.setEstoque(rs.getInt("estoque"));
-            p.setValidade(rs.getDate("validade"));
-            
-            return p;
-
+                return p;
+            } else {
+                // Nenhum resultado encontrado para o ID de produto fornecido
+                // Você pode lançar uma exceção ou lidar com isso de outra maneira
+                System.out.println("Nenhum produto encontrado para o ID: " + id_produto);
+                return null;
+            }
         } catch (SQLException ex) {
-            System.out.println("erro" + ex.getMessage());
+            System.out.println("Erro: " + ex.getMessage());
             return null;
         }
     }
+
 
     public List<Produto> getProdutos() {
         String sql = "SELECT * FROM produto;";
@@ -128,27 +134,25 @@ public class ProdutoDao {
         }
     }
 
-    public List<Produto> getProdutoCod(String cod) {
+    public Produto getProdutoCod(String cod) {
         String sql = "SELECT * FROM produto WHERE cod LIKE ?";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setString(1, "%" + cod + "%");
             ResultSet rs = stmt.executeQuery();
-            List<Produto> listaProdutos = new ArrayList();
 
+            Produto p = new Produto();
+            
             while (rs.next()) {
-                Produto p = new Produto();
-
                 p.setId_produto(rs.getInt("id_produto"));
                 p.setCod(rs.getString("cod"));
                 p.setDescricao(rs.getString("descricao"));
                 p.setEstoque(rs.getInt("estoque"));
                 p.setValidade(rs.getDate("validade"));
                 
-                listaProdutos.add(p);
             }
-            return listaProdutos;
+            return p;
         } catch (SQLException ex) {
             return null;
         }

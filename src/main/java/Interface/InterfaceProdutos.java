@@ -13,14 +13,14 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Interface extends javax.swing.JFrame {
+public class InterfaceProdutos extends javax.swing.JFrame {
 
     /**
      * Creates new form Interface
      */
     private int getIdFromTable = 0;
     
-    public Interface() {
+    public InterfaceProdutos() {
         initComponents();
         preencheTable();
     
@@ -58,7 +58,7 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutos = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,6 +152,11 @@ public class Interface extends javax.swing.JFrame {
         Editar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         Editar.setForeground(new java.awt.Color(255, 255, 255));
         Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
         jPanel4.add(Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 220, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 630, 540));
@@ -167,7 +172,7 @@ public class Interface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Codigo", "Descricao", "Data de Validade"
+                "ID", "Codigo", "Descricao", "Data de Validade", "Estoque"
             }
         ));
         tblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,7 +204,8 @@ public class Interface extends javax.swing.JFrame {
                 p.getId_produto(),
                 p.getCod(),
                 p.getDescricao(),
-                p.getValidade()};
+                p.getValidade(),
+                p.getEstoque()};
             tableProdutos.addRow(obj);
         }
     }
@@ -246,6 +252,26 @@ public class Interface extends javax.swing.JFrame {
         Jdate.setDate(null);
         preencheTable();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        ProdutoDao pDAO = new ProdutoDao();
+        
+        Produto produto = new Produto();
+        
+        int id = getIdFromTable;
+        if(id!= 0) {
+            produto.setId_produto(id);
+            produto.setCod(txtCodigo.getText());
+            produto.setDescricao(txtDescricao.getText());
+            try{
+               produto.setValidade(Jdate.getDate());
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
+            pDAO.editar(produto);
+            preencheTable();
+        }
+    }//GEN-LAST:event_EditarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -264,14 +290,30 @@ public class Interface extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -291,7 +333,7 @@ public class Interface extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Interface().setVisible(true);
+            new InterfaceProdutos().setVisible(true);
         });
     }
 
