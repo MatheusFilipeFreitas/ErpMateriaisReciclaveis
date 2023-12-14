@@ -21,10 +21,12 @@ public class InterfaceOperacao extends javax.swing.JFrame {
     /**
      * Creates new form Interface
      */
+    private int getIdFromTable = 0;
+        
     public InterfaceOperacao() {
         initComponents();
         preencheTable();
-    
+        initComboBox();
     }
 
     /**
@@ -50,8 +52,6 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         btnLimpar = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
         lblCodigo1 = new javax.swing.JLabel();
         comboUsuario = new javax.swing.JComboBox();
         lblCodigo2 = new javax.swing.JLabel();
@@ -65,7 +65,7 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOperacoes = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,7 +108,7 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         jPanel4.add(lblCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        jLabel4.setText("Id do Usuario");
+        jLabel4.setText("Nome do Usuario");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 140, 30));
 
         txtQuantidade.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
@@ -123,7 +123,7 @@ public class InterfaceOperacao extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel4.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 220, 40));
+        jPanel4.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 220, 40));
 
         btnCadastrar.setBackground(new java.awt.Color(190, 26, 43));
         btnCadastrar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -136,32 +136,15 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         });
         jPanel4.add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 220, 40));
 
-        btnExcluir.setBackground(new java.awt.Color(190, 26, 43));
-        btnExcluir.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
-        btnExcluir.setText("Excluir");
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 220, 40));
-
-        btnEditar.setBackground(new java.awt.Color(190, 26, 43));
-        btnEditar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 220, 40));
-
         lblCodigo1.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        lblCodigo1.setText("Id do Produto");
-        jPanel4.add(lblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 30));
+        lblCodigo1.setText("Cód do Produto");
+        jPanel4.add(lblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 140, 30));
 
+        comboUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboUsuarioActionPerformed(evt);
+            }
+        });
         jPanel4.add(comboUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 220, 40));
 
         lblCodigo2.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
@@ -180,9 +163,14 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         jPanel4.add(Jdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 220, 40));
 
         comboOperacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Saída" }));
+        comboOperacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboOperacaoActionPerformed(evt);
+            }
+        });
         jPanel4.add(comboOperacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 220, 40));
 
-        comboMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "asdasd" }));
+        comboMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compra", "Venda" }));
         jPanel4.add(comboMotivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 220, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 630, 540));
@@ -198,9 +186,14 @@ public class InterfaceOperacao extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Cpf"
+                "ID", "Produto", "Usuario", "Operacao", "Motivo", "Quantidade", "Data"
             }
         ));
+        tblOperacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOperacoesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblOperacoes);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 720, 510));
@@ -233,42 +226,68 @@ public class InterfaceOperacao extends javax.swing.JFrame {
         }
     }
     
+    private void initComboBox() {
+        List<Produto> listaProdutos = new ArrayList();
+        ProdutoDao pDAO = new ProdutoDao();
+        listaProdutos = pDAO.getProdutos();
+        for(Produto produto : listaProdutos) {
+            comboProduto.addItem(produto.getCod());
+        }
+        
+        List<Usuario> listaUsuarios = new ArrayList();
+        UsuarioDao uDAO = new UsuarioDao();
+        listaUsuarios = uDAO.getUsuarios();
+        for(Usuario usuario : listaUsuarios) {
+            comboUsuario.addItem(usuario.getNome());
+        }
+    }
+    
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         Operacao o = new Operacao();
-        o.setId_produto((Produto)comboProduto.getSelectedItem());
-        o.setId_usuario((Usuario)comboUsuario.getSelectedItem());
+        
+        ProdutoDao pDAO = new ProdutoDao();
+        UsuarioDao uDAO = new UsuarioDao();
+        
+        Produto p = pDAO.getProdutoCod(comboProduto.getSelectedItem().toString());
+        System.out.println(p.getId_produto());
+        o.setId_produto(p);
+        Usuario u = uDAO.getUsuarioNome(comboUsuario.getSelectedItem().toString());
+        System.out.println(u.getId_usuario());
+        o.setId_usuario(u);
+        
         o.setTipo_operacao(comboOperacao.getSelectedItem().toString());
         o.setMotivo(comboMotivo.getSelectedItem().toString());
         o.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
         o.setData_hora(Jdate.getDate());
-        
-        
-        
         
         OperacaoDao oDAO = new OperacaoDao();
         oDAO.inserir(o);
         preencheTable();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-    }//GEN-LAST:event_btnEditarActionPerformed
-
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparFormulario();
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Exclusao", JOptionPane.YES_NO_OPTION);
-        
-        if(resposta == JOptionPane.YES_OPTION){
-            UsuarioDao uDAO = new UsuarioDao();
-            //uDAO.excluir();
-        }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    private void comboOperacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOperacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboOperacaoActionPerformed
+
+    private void comboUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboUsuarioActionPerformed
+
+    private void tblOperacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOperacoesMouseClicked
+
+    }//GEN-LAST:event_tblOperacoesMouseClicked
     
     private void limparFormulario(){
-       
+       comboProduto.setSelectedIndex(0);
+       comboUsuario.setSelectedIndex(0);
+       comboOperacao.setSelectedIndex(0);
+       comboMotivo.setSelectedIndex(0);
+       txtQuantidade.setText("");
+       Jdate.setDate(null);
     }
     /**
      * @param args the command line arguments
@@ -313,8 +332,6 @@ public class InterfaceOperacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser Jdate;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JComboBox<String> comboMotivo;
     private javax.swing.JComboBox<String> comboOperacao;

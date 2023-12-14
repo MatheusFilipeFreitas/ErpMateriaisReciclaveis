@@ -20,4 +20,9 @@ public class Usuario {
     private int id_usuario;
     private String nome;
     private int cpf;
+    
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

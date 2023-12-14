@@ -35,7 +35,8 @@ public class MainMenu extends javax.swing.JFrame {
         iMenuCadastro = new javax.swing.JMenuItem();
         menuRelatorio = new javax.swing.JMenu();
         iMenuRelatorio = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        menuRelatorio1 = new javax.swing.JMenu();
+        iMenuRelatorio1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,13 +84,17 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(menuRelatorio);
 
-        jMenu1.setText("Operações");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        menuRelatorio1.setText("Operacoes");
+
+        iMenuRelatorio1.setText("Menu");
+        iMenuRelatorio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                iMenuRelatorio1ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        menuRelatorio1.add(iMenuRelatorio1);
+
+        jMenuBar1.add(menuRelatorio1);
 
         setJMenuBar(jMenuBar1);
 
@@ -111,7 +116,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iMenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iMenuCadastroActionPerformed
-        Interface produtoInterface = new Interface();
+        InterfaceProdutos produtoInterface = new InterfaceProdutos();
         produtoInterface.setVisible(true);
     }//GEN-LAST:event_iMenuCadastroActionPerformed
 
@@ -120,14 +125,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_iMenuSairActionPerformed
 
     private void iMenuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iMenuRelatorioActionPerformed
-        //        Interface usuarioInterface = new Interface();
-        //        livro.setVisible(true);
+        InterfaceUsuarios usuarioInterface = new InterfaceUsuarios();
+        usuarioInterface.setVisible(true);
     }//GEN-LAST:event_iMenuRelatorioActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-//        Interface operacaoInterface = new Interface();
-//        produtoInterface.setVisible(true);
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void iMenuRelatorio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iMenuRelatorio1ActionPerformed
+        InterfaceOperacao operacaoInterface = new InterfaceOperacao();
+        operacaoInterface.setVisible(true);
+    }//GEN-LAST:event_iMenuRelatorio1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,13 +173,14 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem iMenuCadastro;
     private javax.swing.JMenuItem iMenuRelatorio;
+    private javax.swing.JMenuItem iMenuRelatorio1;
     private javax.swing.JMenuItem iMenuSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenu menuRelatorio;
+    private javax.swing.JMenu menuRelatorio1;
     // End of variables declaration//GEN-END:variables
 }
